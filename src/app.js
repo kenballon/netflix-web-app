@@ -92,7 +92,7 @@ class RenderUI {
 
         const heroSectionEl = `
         <div class="hero_billboard-wrapper">
-            <div class="billboard-title">
+            <div class="billboard-title">            
                 <h1>${title}</h1>
                 <p>${oveview}</p>
                <div class="hero_btn-container">
@@ -128,13 +128,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const moviesAndTV = new Movies();
 
 
-    moviesAndTV.getMoviesAndTVShowsTrending().then(movies => {        
+    moviesAndTV.getMoviesAndTVShowsTrending().then(movies => {
         renderUIComponent.displayMoviesShows(movies);
     });
 
     moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then(netflixOriginal => {
-        let indexHeroImg = 0;        
-        renderUIComponent.createHeroSection(api_img_url + netflixOriginal[indexHeroImg].backdrop_path, (netflixOriginal[indexHeroImg].title || netflixOriginal[indexHeroImg].original_name), netflixOriginal[indexHeroImg].overview);
+        
+        let i = 15;
+        // const colCounter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        // const ffff = ['asdf','grg','hello','bye'];
+        // let counter = setInterval(() => {
+        //     i++;
+        //     colCounter[i % colCounter.length];           
+        // }, 1000);
+
+        // console.log(counter);
+        renderUIComponent.createHeroSection(api_img_url + netflixOriginal[i].backdrop_path, (netflixOriginal[i].title || netflixOriginal[i].original_name), netflixOriginal[i].overview);
         renderUIComponent.displayNetflixOriginal(netflixOriginal);
     })
 
