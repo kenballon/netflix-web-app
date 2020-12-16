@@ -354,6 +354,10 @@ section {
     z-index: 10;
     width: 100vw;
     background-color: #0a0a0a;
+    height: 60px;
+  }
+  .header-mobile .menu-mobile-wrapper {
+    height: 100%;
   }
   .header-mobile .menu-mobile-wrapper .ul-mobile-view {
     display: -webkit-box;
