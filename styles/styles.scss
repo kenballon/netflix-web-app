@@ -283,7 +283,7 @@ section {
     .header {
         display: none;
     }
-    .header-mobile {
+    .header-mobile {        
         display: block;
         position: fixed;
         bottom: 0;
@@ -292,9 +292,13 @@ section {
         background-color: rgb(10, 10, 10);
         height: 60px;       
 
-        .menu-mobile-wrapper {          
+        .menu-mobile-wrapper { 
+            display: flex;
+            align-items: center;         
             height: 100%;
-            .ul-mobile-view {                
+            .ul-mobile-view {     
+                width: 100%;
+                position: relative;           
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
