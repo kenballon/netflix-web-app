@@ -26,10 +26,10 @@
                 </div>
                 <nav>
                     <ul class="nav-ul">
-                        <li>Home</li>
-                        <li>TV Shows</li>
-                        <li>Movies</li>
-                        <li>New & Popular</li>
+                        <li><a href="#" title="No Link Yet">Home</a></li>
+                        <li><a href="#" title="No Link Yet">TV Shows</a></li>
+                        <li><a href="#" title="No Link Yet">Movies</a></li>
+                        <li><a href="#" title="No Link Yet">New & Popular</a></li>
                     </ul>
                 </nav>
             </div>
@@ -43,33 +43,46 @@
         </div>
     </header>
 
-    <section class="container-fluid hero">
-        <!-- dyanamically inject hero content html  -->
+
+    <header class="header-mobile">
+        <div class="menu-mobile-wrapper">
+            <ul class="ul-mobile-view">
+                <li><i class="fas fa-home"></i></li>
+                <li><i class="fas fa-search"></i></li>
+                <li><i class="fas fa-download"></i></li>
+                <li><i class="fas fa-bars"></i></li>
+            </ul>
+        </div>
+    </header>
+
+
+    <!-- dyanamically inject hero content html  -->
+    <section class="hero">
     </section>
 
+    <!-- inject images movies and shows card  -->
     <section class="movie-card-section">
-        <div class="title-category">
+        <div class="title-category inner-width">
             <h2>Trending Movies & Shows</h2>
         </div>
-        <div class="movie-img-wrapper">
+        <div class="movie-img-wrapper inner-width">
             <div class="carousel">
-                <!-- inject images movies and shows card  -->
+
             </div>
         </div>
 
     </section>
-
-    <section class="movie-card-section_netflix">
-        <div class="title-category">
+    <!-- inject images movies and shows card  -->
+    <section class="movie-card-section netflix">
+        <div class="title-category inner-width">
             <h2>Netflix Original</h2>
         </div>
-        <div class="movie-img-wrapper">
-            <div class="carousel netflix">
-                <!-- inject images movies and shows card  -->
+        <div class="movie-img-wrapper inner-width">
+            <div class="carousel netflix-carousel">
             </div>
         </div>
-
     </section>
+
     <script src="./src/app.js" type="module"></script>
 </body>
 

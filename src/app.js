@@ -4,7 +4,7 @@ import {
 
 
 const carouselSlider = document.querySelector('.carousel');
-const carouselSliderNetflix = document.querySelector('.netflix');
+const carouselSliderNetflix = document.querySelector('.netflix-carousel');
 const heroSection = document.querySelector('.hero');
 
 // get api token
@@ -63,7 +63,7 @@ class RenderUI {
         moviesAndShows.forEach(element => {
             result += `
             <div class="carousel_carousel-item" data-target="card-item">       
-                     <img src="${api_img_url + element.poster_path}" alt="${element.title || element.original_name}" width="200">                            
+                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">                            
             </div>   
             `;
         });
@@ -78,7 +78,7 @@ class RenderUI {
         moviesAndShows.forEach(element => {
             result += `
             <div class="carousel_carousel-item" data-target="card-item">       
-                     <img src="${api_img_url + element.poster_path}" alt="${element.title || element.original_name}" width="200">                            
+                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">                            
             </div>   
             `;
         });
@@ -91,7 +91,7 @@ class RenderUI {
         heroSection.setAttribute('style', `background-image:url(${img})`);
 
         const heroSectionEl = `
-        <div class="hero_billboard-wrapper">
+        <div class="hero_billboard-wrapper inner-width">
             <div class="billboard-title">            
                 <h1>${title}</h1>
                 <p>${oveview}</p>
@@ -132,17 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         renderUIComponent.displayMoviesShows(movies);
     });
 
-    moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then(netflixOriginal => {
-        
-        let i = 15;
-        // const colCounter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        // const ffff = ['asdf','grg','hello','bye'];
-        // let counter = setInterval(() => {
-        //     i++;
-        //     colCounter[i % colCounter.length];           
-        // }, 1000);
-
-        // console.log(counter);
+    moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then(netflixOriginal => {        
+        let i = 2;        
         renderUIComponent.createHeroSection(api_img_url + netflixOriginal[i].backdrop_path, (netflixOriginal[i].title || netflixOriginal[i].original_name), netflixOriginal[i].overview);
         renderUIComponent.displayNetflixOriginal(netflixOriginal);
     })
@@ -152,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headerScrollSticky()
     };
     const header = document.querySelector('.header');
-    const sticky = header.offsetTop;
+    const sticky = header.offsetTop;   
 
     function headerScrollSticky() {
         if (window.pageYOffset > sticky) {
