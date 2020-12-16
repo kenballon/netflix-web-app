@@ -172,7 +172,6 @@ section {
 
 .inner-width {
   width: 90%;
-  max-width: 1366px;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
@@ -305,6 +304,7 @@ section {
 
 .movie-card-section .movie-img-wrapper .carousel .carousel_carousel-item img {
   border-radius: 3px;
+  width: 250px;
 }
 
 .netflix {

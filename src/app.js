@@ -129,12 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     moviesAndTV.getMoviesAndTVShowsTrending().then(movies => {
+        let i = 1;        
+        renderUIComponent.createHeroSection(api_img_url + movies[i].backdrop_path, (movies[i].title || movies[i].original_name), movies[i].overview);
         renderUIComponent.displayMoviesShows(movies);
     });
 
-    moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then(netflixOriginal => {        
-        let i = 2;        
-        renderUIComponent.createHeroSection(api_img_url + netflixOriginal[i].backdrop_path, (netflixOriginal[i].title || netflixOriginal[i].original_name), netflixOriginal[i].overview);
+    moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then(netflixOriginal => {                
         renderUIComponent.displayNetflixOriginal(netflixOriginal);
     })
 
