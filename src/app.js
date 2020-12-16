@@ -152,4 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('sticky');
         }
     }
+
+    // show menu on mobile view
+    const menu = document.getElementById('mobile-menu');
+    const menuOverlay = document.querySelector('.menu-pop-container');
+
+    menu.addEventListener('click',() => {
+        menuOverlay.classList.add('popup-menu');
+    })
+    menuOverlay.addEventListener('click',()=>{
+        menuOverlay.classList.remove('popup-menu');
+    })
 });
