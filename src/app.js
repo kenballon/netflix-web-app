@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     moviesAndTV.getMoviesAndTVShowsTrending().then(movies => {
-        let i = 1;        
+        let i = 0;        
         renderUIComponent.createHeroSection(api_img_url + movies[i].backdrop_path, (movies[i].title || movies[i].original_name), movies[i].overview);
         renderUIComponent.displayMoviesShows(movies);
     });
