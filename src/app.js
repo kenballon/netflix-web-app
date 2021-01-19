@@ -63,7 +63,8 @@ class RenderUI {
         moviesAndShows.forEach(element => {
             result += `
             <div class="carousel_carousel-item" data-target="card-item">       
-                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">                            
+                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">    
+                     <h1 class="movie-title">${element.title || element.name}</h1>                        
             </div>   
             `;
         });
@@ -127,10 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderUIComponent = new RenderUI();
     const moviesAndTV = new Movies();
 
-
     moviesAndTV.getMoviesAndTVShowsTrending().then(movies => {
+        console.log(movies);
         let i = 0;        
-        renderUIComponent.createHeroSection(api_img_url + movies[i].backdrop_path, (movies[i].title || movies[i].original_name), movies[i].overview);
+        renderUIComponent.createHeroSection(api_img_url + movies[i].poster_path, (movies[i].title || movies[i].original_name), movies[i].overview);
         renderUIComponent.displayMoviesShows(movies);
     });
 
