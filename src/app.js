@@ -63,8 +63,7 @@ class RenderUI {
         moviesAndShows.forEach(element => {
             result += `
             <div class="carousel_carousel-item" data-target="card-item">       
-                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">    
-                     <h1 class="movie-title">${element.title || element.name}</h1>                        
+                     <img src="${api_img_url + element.poster_path}" alt="${element.title || element.original_name}" width="200">                                            
             </div>   
             `;
         });
@@ -79,7 +78,7 @@ class RenderUI {
         moviesAndShows.forEach(element => {
             result += `
             <div class="carousel_carousel-item" data-target="card-item">       
-                     <img src="${api_img_url + element.backdrop_path}" alt="${element.title || element.original_name}" width="200">                            
+                     <img src="${api_img_url + element.poster_path}" alt="${element.title || element.original_name}" width="200">                            
             </div>   
             `;
         });
