@@ -157,16 +157,19 @@ section {
 }
 
 .hero {
+  position: relative;
   height: 100vh;
-  background-position: top;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: -80px;
   width: 100%;
   .hero_billboard-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
     height: 100%;
+    z-index: 1;
     .billboard-title {
       width: 100%;
       h1 {
@@ -224,6 +227,17 @@ section {
       }
     }
   }
+
+  &::after{    
+    content: '';
+    display: block;    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;    
+    background-image: linear-gradient(to top, #141414ec , #1414141c);
+  }
 }
 
 .movie-card-section {
@@ -235,14 +249,15 @@ section {
     }
   }
   .movie-img-wrapper {
-    .carousel {
-      display: flex;
+    .carousel {      
       width: 100%;
       margin-left: auto;
       margin-right: auto;
-      overflow-x: scroll;
-      touch-action: pan-x;
+      overflow-x: visible;
+      white-space: nowrap;
+      touch-action: pan-y;
       .carousel_carousel-item {
+        display: inline-block;
         margin: 3px;
         img {
           border-radius: 3px;
@@ -270,14 +285,15 @@ section {
     }
   }
   .movie-img-wrapper {
-    .carousel {
-      display: flex;
+    .carousel {      
       width: 100%;
       margin-left: auto;
       margin-right: auto;
-      overflow-x: scroll;
-      touch-action: pan-x;
+      overflow-x: visible;
+      white-space: nowrap;
+      touch-action: pan-y;
       .carousel_carousel-item {
+        display: inline-block;
         margin: 5px;
         img {
           border-radius: 3px;

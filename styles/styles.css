@@ -178,8 +178,9 @@ section {
 }
 
 .hero {
+  position: relative;
   height: 100vh;
-  background-position: top;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: -80px;
@@ -187,6 +188,7 @@ section {
 }
 
 .hero .hero_billboard-wrapper {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -194,6 +196,7 @@ section {
       -ms-flex-align: center;
           align-items: center;
   height: 100%;
+  z-index: 1;
 }
 
 .hero .hero_billboard-wrapper .billboard-title {
@@ -274,6 +277,18 @@ section {
   background-color: rgba(47, 47, 141, 0.8);
 }
 
+.hero::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#141414ec), to(#1414141c));
+  background-image: linear-gradient(to top, #141414ec, #1414141c);
+}
+
 .movie-card-section {
   margin-top: -120px;
 }
@@ -287,18 +302,17 @@ section {
 }
 
 .movie-card-section .movie-img-wrapper .carousel {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  overflow-x: scroll;
-  -ms-touch-action: pan-x;
-      touch-action: pan-x;
+  overflow-x: visible;
+  white-space: nowrap;
+  -ms-touch-action: pan-y;
+      touch-action: pan-y;
 }
 
 .movie-card-section .movie-img-wrapper .carousel .carousel_carousel-item {
+  display: inline-block;
   margin: 3px;
 }
 
@@ -329,18 +343,17 @@ section {
 }
 
 .netflix .movie-img-wrapper .carousel {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  overflow-x: scroll;
-  -ms-touch-action: pan-x;
-      touch-action: pan-x;
+  overflow-x: visible;
+  white-space: nowrap;
+  -ms-touch-action: pan-y;
+      touch-action: pan-y;
 }
 
 .netflix .movie-img-wrapper .carousel .carousel_carousel-item {
+  display: inline-block;
   margin: 5px;
 }
 
