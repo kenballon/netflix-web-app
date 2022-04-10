@@ -1,14 +1,13 @@
-document.addEventListener('readystatechange', e => {
-    if(e.target.readyState === 'complete')
-    loadMovieList();        
-})
-
+document.addEventListener("readystatechange", (e) => {
+  if (e.target.readyState === "complete") loadMovieList();
+});
 
 import { TMDBKey } from "./api.js";
 
 const carouselSlider = document.querySelector(".carousel");
 const carouselSliderNetflix = document.querySelector(".netflix-carousel");
 const heroSection = document.querySelector(".hero");
+const modalShow = document.querySelector(".modal");
 
 // get api token
 // url variables
@@ -63,7 +62,7 @@ class RenderUI {
 
     moviesAndShows.forEach((element) => {
       result += `
-            <div class="carousel_carousel-item" data-target="card-item">       
+            <div class="carousel_carousel-item" data-target="card-item" data-id="${element.id}">       
                      <img src="${api_img_url + element.poster_path}" alt="${
         element.title || element.original_name
       }" width="200">                                            
@@ -126,14 +125,12 @@ class RenderUI {
   }
 }
 
-
 const loadMovieList = () => {
   const renderUIComponent = new RenderUI();
   const moviesAndTV = new Movies();
 
-  moviesAndTV.getMoviesAndTVShowsTrending().then((movies) => {    
-    let i = 0;
-    console.log(movies.slice(0,5))
+  moviesAndTV.getMoviesAndTVShowsTrending().then((movies) => {
+    let i = 0;    
     renderUIComponent.createHeroSection(
       api_img_url + movies[i].poster_path,
       movies[i].title || movies[i].original_name,
@@ -144,8 +141,14 @@ const loadMovieList = () => {
 
   moviesAndTV.getMoviesAndTVShowsNetflixOriginal().then((netflixOriginal) => {
     renderUIComponent.displayNetflixOriginal(netflixOriginal);
+  }).then(() => {
+    showModalMoreInfo();
   });
 
+  makeHeaderSticky();
+};
+
+const makeHeaderSticky = () => {
   // make header sticky when scroll
   window.onscroll = function () {
     headerScrollSticky();
@@ -170,5 +173,72 @@ const loadMovieList = () => {
   });
   menuOverlay.addEventListener("click", () => {
     menuOverlay.classList.remove("popup-menu");
+  });
+};
+
+const showModalMoreInfo = () => {
+  const getDataFromMovieClass = new Movies();
+  const movieItemClicked = document.querySelectorAll(".carousel_carousel-item");
+
+  let innderModalShow = "";
+
+  getDataFromMovieClass.getMoviesAndTVShowsTrending().then((movies) => {    
+
+    movieItemClicked.forEach((clickedMovie) => {
+      const movie_ID = clickedMovie.getAttribute("data-id");
+
+      clickedMovie.addEventListener("click", () => {
+        movies.forEach((data) => {
+          
+          if (parseInt(movie_ID) === data.id) {            
+            innderModalShow = `
+                        <div class="modal_inner-wrapper">
+                            <div class="movie-backdrop-img-wrapper" style="background-image: URL(${
+                              api_img_url + data.backdrop_path
+                            })">
+                                <div class="movie-heading-wrapper">
+                                    <!-- title -->
+                                    <header>
+                                        <h1 class="modal__movie-title">${
+                                          (data.original_title || data.original_name)
+                                        }</h1>
+                                    </header>
+                    
+                                    <!-- play this movie/show  -->
+                                    <div class="play-wapper">
+                                        <button class="button play-movie-btn">Play</button>
+                                    </div>
+                                </div>
+                                <div class="close-modal" id="close-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </div>
+                            </div>        
+                            <div class="excerpt col-2">
+                               <div class="summary-wrapper">
+                                  <h2>Summary</h2>
+                                  <p>${data.overview}</p>
+                               </div>
+                               <div class="release-year">
+                                  <p class="yr-released">Year Released: ${(data.release_date || data.first_air_date)}</p>
+                                  <p class="yr-released">Type: ${(data.media_type || 'TV Show')}</p>
+                               </div>
+                            </div>
+                        </div>
+                        `;
+            modalShow.classList.add("opened");
+            modalShow.insertAdjacentHTML("beforeend", innderModalShow);
+            closeModal();
+          }
+        });
+      });
+    });
+  });
+};
+
+const closeModal = () => {
+  const closeModal = document.querySelector("#close-icon");
+  closeModal.addEventListener("click", () => {
+    modalShow.classList.remove("opened");
+    modalShow.replaceChildren();
   });
 };
