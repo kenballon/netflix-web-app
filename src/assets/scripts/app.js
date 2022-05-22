@@ -223,34 +223,12 @@ const onHandleClick = (handle) => {
 
     if (handle.classList.contains("handle-previous")) {
         nextTouched();
-        // slider.style.setProperty('--slider-index', sliderIndex - 1);
     }
     if (handle.classList.contains("handle-next")) {
-        // slider.style.setProperty('--slider-index', sliderIndex + 1);
-        sliderContent.classList.add('next-animation');
-        if (isTouched) {
-            sliderContent.style.transform = 'translate3d(100%, 0px, 0px)';
-            sliderContent.addEventListener('transitionend', nextTouched, false);
-        } else if (!isTouched) {
-            sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
-
-            sliderContent.addEventListener('transitionend', afterAnimation, false);
-        }
+        nextTouched();
     }
 };
 
-var afterAnimation = function() {
-    sliderContent.classList.remove('next-animation');
-
-    if (!isTouched) {
-        var icon = document.createElement('i');
-        icon.classList.add('fa', 'fa-chevron-left');
-        document.querySelector('.prev').appendChild(icon);
-        isTouched = true;
-    }
-
-    sliderContent.removeEventListener('transitionend', afterAnimation);
-};
 
 const nextTouched = () => {
     const contents = Array.from(contentsArray);
@@ -268,12 +246,10 @@ const nextTouched = () => {
     }
 
     for (let len = contentsArray.length - 1; len >= 0; --len) {
-        console.log(
-            sliderContent.insertBefore(newChild[len], sliderContent.firstChild)
-        );
+        sliderContent.insertBefore(newChild[len], sliderContent.firstChild)
     }
 
-    sliderContent.classList.remove('next-animation');
-    sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
-    sliderContent.removeEventListener('transitionend', nextTouched);
+    // sliderContent.classList.remove('next-animation');
+    // sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
+    // sliderContent.removeEventListener('transitionend', nextTouched);
 };

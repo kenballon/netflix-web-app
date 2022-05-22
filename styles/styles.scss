@@ -229,8 +229,11 @@ section {
     .slider-mask {
         .slider-content {
             --slider-index: 0;
+            --trans-slide: transform 0.7s ease-in-out;
             white-space: nowrap;
             margin-bottom: 50px;
+            transform: translateX(calc(var(--slider-index) * -100%));
+            transition: var(--trans-slide);
             .carousel-item {
                 position: relative;
                 display: inline-block;
@@ -240,10 +243,6 @@ section {
                     width: 100%;
                 }
             }
-        }
-        .slider-content.next-transition {
-            text-transform: uppercase;
-            transition: transform 0.7s ease-in-out;
         }
     }
     .handle {
