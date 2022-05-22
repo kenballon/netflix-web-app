@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon  -->
-    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />    
-    <title>Netflix Mockup</title>
+    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
+    <title>Netflix Mock | Vanilla JS</title>
 
-    <!-- font awesome  -->    
+    <!-- font awesome  -->
     <!-- custom css  -->
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
@@ -18,7 +18,7 @@
         <div class="header-container">
             <div class="nav-wrapper">
                 <div class="logo-wrapper">
-                    <img src="./src/assets/icons8-netflix-96.png" alt="Netflix Logo" width="97">
+                    <img src="./src/assets/images//icons8-netflix-96.png" alt="Netflix Logo" width="97">
                 </div>
                 <nav>
                     <ul class="nav-ul">
@@ -58,25 +58,31 @@
 
     <!-- inject images movies and shows card  -->
     <section class="movie-card-section">
-        <div class="title-category inner-width">
+        <div class="title-category padding-inline-60">
             <h2>Trending Movies & Shows</h2>
         </div>
-        <div class="movie-img-wrapper inner-width">
-            <div class="carousel">
+        <div class="movie-img-wrapper">
+            <div class="slider padding-inline-60">
+                <ul class="pagination-indicator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <div class="slider-mask">
+                    <div class="slider-content">
+
+                    </div>
+                </div>
+                <span class="handle handle-next" id="handle-next">
+                    <img src="/src/assets/images/Arrow - Right 4.svg" alt="arrow next">
+                </span>
+                <span class="handle handle-previous" id="handle-previous">
+                    <img src="/src/assets/images/Arrow - Left 4.svg" alt="arrow previous">
+                </span>
 
             </div>
         </div>
 
-    </section>
-    <!-- inject images movies and shows card  -->
-    <section class="movie-card-section netflix">
-        <div class="title-category inner-width">
-            <h2>Netflix Original</h2>
-        </div>
-        <div class="movie-img-wrapper inner-width">
-            <div class="carousel netflix-carousel">
-            </div>
-        </div>
     </section>
 
     <div class="menu-pop-container">
@@ -91,10 +97,10 @@
         </div>
     </div>
 
-    <div class="modal">       
+    <div class="modal">
     </div>
 
-    <script src="./src/app.js" type="module"></script>
+    <script src="/src/assets/scripts/app.js" type="module" defer></script>
 </body>
 
 </html>
