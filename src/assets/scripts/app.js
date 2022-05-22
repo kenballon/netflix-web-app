@@ -250,6 +250,6 @@ const nextTouched = () => {
     }
 
     // sliderContent.classList.remove('next-animation');
-    // sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
+    sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
     // sliderContent.removeEventListener('transitionend', nextTouched);
 };

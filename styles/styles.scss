@@ -232,8 +232,8 @@ section {
             --trans-slide: transform 0.7s ease-in-out;
             white-space: nowrap;
             margin-bottom: 50px;
-            transform: translateX(calc(var(--slider-index) * -100%));
-            transition: var(--trans-slide);
+            // transform: translateX(calc(var(--slider-index) * -100%));
+            // transition: var(--trans-slide);
             .carousel-item {
                 position: relative;
                 display: inline-block;
