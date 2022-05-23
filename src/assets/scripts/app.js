@@ -128,6 +128,78 @@ const loadMovieList = () => {
     moveLeftAndRight();
 };
 
+
+let numberOfNextSlideClicks = 0;
+
+const moveLeftAndRight = () => {
+    document.addEventListener("click", (e) => {
+        let handle;
+        if (e.target.matches(".handle")) {
+            handle = e.target;
+        } else {
+            handle = e.target.closest(".handle");
+        }
+        if (handle != null) {
+            onHandleClick(handle);
+        }
+    });
+};
+
+const onHandleClick = (handle) => {
+    const slider = handle.closest(".slider").querySelector(".slider-mask");
+
+    const sliderIndex = parseInt(
+        getComputedStyle(slider).getPropertyValue("--slider-index")
+    );
+
+    if (handle.classList.contains("handle-previous")) {
+        slider.style.setProperty("--slider-index", sliderIndex - 1);
+        numberOfNextSlideClicks++;
+
+        if (numberOfNextSlideClicks > 1) {
+
+            // TODO: when the nextSlide button reaches on third slide
+            // return a new set of movies array           
+            nextTouched();
+            numberOfNextSlideClicks = 0;
+        }
+    }
+    if (handle.classList.contains("handle-next")) {
+        slider.style.setProperty("--slider-index", sliderIndex + 1);
+
+        numberOfNextSlideClicks++;
+
+        if (numberOfNextSlideClicks > 1) {
+
+            // TODO: when the nextSlide button reaches on third slide
+            // return a new set of movies array           
+            nextTouched();
+            numberOfNextSlideClicks = 0;
+        }
+    }
+};
+
+const sliderContent = document.querySelector(".slider-content");
+const contentsArray = sliderContent.children;
+
+const nextTouched = () => {
+    let contents = [...contentsArray];
+    const removedFirstFour = contents.splice(0, 4);
+    // const newArr = contents.concat(removedFirstFour);
+
+    contentsArray.push(removedFirstFour);
+
+    // for (let j = 4; j < newArr.length && j < 8; j++) {
+    //     newArr[j].classList.add('is-active');
+    // }
+
+    // for (let len = contentsArray.length - 1; len >= 0; --len) {
+    //     sliderContent.insertBefore(newArr[len], sliderContent.firstChild);
+    // }
+
+};
+
+
 const showModalMoreInfo = () => {
     const getDataFromMovieClass = new Movies();
     const movieItemClicked = document.querySelectorAll(".carousel_carousel-item");
@@ -196,64 +268,4 @@ const closeModal = () => {
         modalShow.classList.remove("opened");
         modalShow.replaceChildren();
     });
-};
-
-let numberOfNextSlideClicks = 0;
-
-const moveLeftAndRight = () => {
-    document.addEventListener("click", (e) => {
-        let handle;
-        if (e.target.matches(".handle")) {
-            handle = e.target;
-        } else {
-            handle = e.target.closest(".handle");
-        }
-        if (handle != null) {
-            onHandleClick(handle);
-        }
-    });
-};
-
-const onHandleClick = (handle) => {
-    const slider = handle.closest(".slider").querySelector(".slider-mask");
-
-    const sliderIndex = parseInt(
-        getComputedStyle(slider).getPropertyValue("--slider-index")
-    );
-
-    if (handle.classList.contains("handle-previous")) {
-        slider.style.setProperty("--slider-index", sliderIndex - 1);
-    }
-    if (handle.classList.contains("handle-next")) {
-        slider.style.setProperty("--slider-index", sliderIndex + 1);
-
-        numberOfNextSlideClicks++;
-
-        if (numberOfNextSlideClicks > 1) {
-
-            // TODO: when the nextSlide button reaches on third slide
-            // return a new set of movies array           
-            nextTouched();
-            numberOfNextSlideClicks = 0;
-        }
-    }
-};
-
-const sliderContent = document.querySelector(".slider-content");
-const contentsArray = sliderContent.children;
-
-const nextTouched = () => {
-    let contents = [...contentsArray];
-    const removedFirstFour = contents.splice(0, 4);
-    const newArr = contents.concat(removedFirstFour);
-
-    for (let j = 4; j < newArr.length && j < 8; j++) {
-        newArr[j].classList.add('is-active');
-    }
-
-    for (let len = contentsArray.length - 1; len >= 0; --len) {
-        sliderContent.insertBefore(newArr[len], sliderContent.firstChild);
-    }
-
-    console.log(contentsArray.length);
 };
