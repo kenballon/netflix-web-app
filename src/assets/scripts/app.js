@@ -1,7 +1,7 @@
 document.addEventListener("readystatechange", (e) => {
-    if (e.target.readyState === "complete") {
-        loadMovieList();
-    }
+  if (e.target.readyState === "complete") {
+    loadMovieList();
+  }
 });
 
 import { TMDBKey } from "./api.js";
@@ -18,66 +18,67 @@ const api_img_url = "https://image.tmdb.org/t/p/original";
 
 // objects catergories from TMDB
 const requestCat = {
-    fetchNetflixOriginals: `/discover/tv?api_key=${API}&with_networks=213`,
-    fetchTrending: `/trending/all/week?api_key=${API}&language=en-PH`,
-    fetchTopRated: `/movie/top_rated?api_key=${API}&language=en-PH`,
-    fetchActionMovies: `/discover/movie?api_key=${API}&with_genres=28`,
-    fetchComedy: `/discover/movie?api_key=${API}&with_genres=35`,
-    fetchHorror: `/discover/movie?api_key=${API}&with_genres=27`,
-    fetchRomance: `/discover/movie?api_key=${API}&with_genres=10749`,
-    fetchDocumentaries: `/discover/movie?api_key=${API}&with_genres=99`,
+  fetchNetflixOriginals: `/discover/tv?api_key=${API}&with_networks=213`,
+  fetchTrending: `/trending/all/week?api_key=${API}&language=en-PH`,
+  fetchTopRated: `/movie/top_rated?api_key=${API}&language=en-PH`,
+  fetchActionMovies: `/discover/movie?api_key=${API}&with_genres=28`,
+  fetchComedy: `/discover/movie?api_key=${API}&with_genres=35`,
+  fetchHorror: `/discover/movie?api_key=${API}&with_genres=27`,
+  fetchRomance: `/discover/movie?api_key=${API}&with_genres=10749`,
+  fetchDocumentaries: `/discover/movie?api_key=${API}&with_genres=99`,
 };
 
 // Movies and TV Show from TMDB API
 class Movies {
-    // method to fetch data
-    async getMoviesAndTVShowsTrending() {
-        try {
-            const results = await fetch(api_url + requestCat.fetchTrending);
-            const data = await results.json();
-            const movies = data.results;
+  // method to fetch data
+  async getMoviesAndTVShowsTrending() {
+    try {
+      const results = await fetch(api_url + requestCat.fetchTrending);
+      const data = await results.json();
+      const movies = data.results;
 
-            return movies;
-        } catch (error) {
-            console.log(error);
-        }
+      return movies;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async getMoviesAndTVShowsNetflixOriginal() {
-        try {
-            const results = await fetch(api_url + requestCat.fetchNetflixOriginals);
-            const data = await results.json();
-            const movies = data.results;
+  async getMoviesAndTVShowsNetflixOriginal() {
+    try {
+      const results = await fetch(api_url + requestCat.fetchNetflixOriginals);
+      const data = await results.json();
+      const movies = data.results;
 
-            return movies;
-        } catch (error) {
-            console.log(error);
-        }
+      return movies;
+    } catch (error) {
+      console.log(error);
     }
+  }
 }
 
 // Render UI Compnonents such as Movie Card
 class RenderUI {
-    displayMoviesShows(moviesAndShows) {
-        let result = "";
+  displayMoviesShows(moviesAndShows) {
+    let result = "";
 
-        moviesAndShows.forEach((element) => {
-            result += `
+    moviesAndShows.forEach((element) => {
+  
+      result += `
             <div class="carousel-item">       
                      <img src="${api_img_url + element.poster_path}" alt="${
         element.title || element.original_name
       }" width="200">                                            
             </div>   
             `;
-        });
+    });
 
-        carouselSlider.insertAdjacentHTML("beforeend", result);
-    }
+    carouselSlider.insertAdjacentHTML("beforeend", result);
+  }
 
-    createHeroSection(img, title, oveview) {
-        heroSection.setAttribute("style", `background-image:url(${img})`);
+  createHeroSection(img, title, oveview) {
+    heroSection.setAttribute("style", `background-image:url(${img})`);
 
-        const heroSectionEl = `
+    const heroSectionEl = `
         <div class="hero_billboard-wrapper inner-width">
             <div class="billboard-title">
                 <h1>${title}</h1>
@@ -106,41 +107,41 @@ class RenderUI {
 
         </div>
         `;
-        heroSection.insertAdjacentHTML("beforeend", heroSectionEl);
-    }
+    heroSection.insertAdjacentHTML("beforeend", heroSectionEl);
+  }
 }
 
 const loadMovieList = () => {
-    const renderUIComponent = new RenderUI();
-    const moviesAndTV = new Movies();
+  const renderUIComponent = new RenderUI();
+  const moviesAndTV = new Movies();
 
-    moviesAndTV.getMoviesAndTVShowsTrending().then((movies) => {
-        let i = 0;
-        renderUIComponent.createHeroSection(
-            api_img_url + movies[i].poster_path,
-            movies[i].title || movies[i].original_name,
-            movies[i].overview
-        );
-        renderUIComponent.displayMoviesShows(movies);
-    });
+  moviesAndTV.getMoviesAndTVShowsTrending().then((movies) => {
+    let i = 0;
+    renderUIComponent.createHeroSection(
+      api_img_url + movies[i].poster_path,
+      movies[i].title || movies[i].original_name,
+      movies[i].overview
+    );
+    renderUIComponent.displayMoviesShows(movies);
+  });
 
-    moveLeftAndRight();
+  moveLeftAndRight();
 };
 
 const showModalMoreInfo = () => {
-    const getDataFromMovieClass = new Movies();
-    const movieItemClicked = document.querySelectorAll(".carousel_carousel-item");
+  const getDataFromMovieClass = new Movies();
+  const movieItemClicked = document.querySelectorAll(".carousel_carousel-item");
 
-    let innderModalShow = "";
+  let innderModalShow = "";
 
-    getDataFromMovieClass.getMoviesAndTVShowsTrending().then((movies) => {
-        movieItemClicked.forEach((clickedMovie) => {
-            const movie_ID = clickedMovie.getAttribute("data-id");
+  getDataFromMovieClass.getMoviesAndTVShowsTrending().then((movies) => {
+    movieItemClicked.forEach((clickedMovie) => {
+      const movie_ID = clickedMovie.getAttribute("data-id");
 
-            clickedMovie.addEventListener("click", () => {
-                movies.forEach((data) => {
-                    if (parseInt(movie_ID) === data.id) {
-                        innderModalShow = `
+      clickedMovie.addEventListener("click", () => {
+        movies.forEach((data) => {
+          if (parseInt(movie_ID) === data.id) {
+            innderModalShow = `
                         <div class="modal_inner-wrapper">
                             <div class="movie-backdrop-img-wrapper" style="background-image: URL(${
                               api_img_url + data.backdrop_path
@@ -179,76 +180,74 @@ const showModalMoreInfo = () => {
                             </div>
                         </div>
                         `;
-                        modalShow.classList.add("opened");
-                        modalShow.insertAdjacentHTML("beforeend", innderModalShow);
-                        closeModal();
-                    }
-                });
-            });
+            modalShow.classList.add("opened");
+            modalShow.insertAdjacentHTML("beforeend", innderModalShow);
+            closeModal();
+          }
         });
+      });
     });
+  });
 };
 
 const closeModal = () => {
-    const closeModal = document.querySelector("#close-icon");
-    closeModal.addEventListener("click", () => {
-        modalShow.classList.remove("opened");
-        modalShow.replaceChildren();
-    });
+  const closeModal = document.querySelector("#close-icon");
+  closeModal.addEventListener("click", () => {
+    modalShow.classList.remove("opened");
+    modalShow.replaceChildren();
+  });
 };
 
 const moveLeftAndRight = () => {
-    document.addEventListener("click", (e) => {
-        let handle;
-        if (e.target.matches(".handle")) {
-            handle = e.target;
-        } else {
-            handle = e.target.closest(".handle");
-        }
-        if (handle != null) {
-            onHandleClick(handle);
-        }
-    });
+  document.addEventListener("click", (e) => {
+    let handle;
+    if (e.target.matches(".handle")) {
+      handle = e.target;
+    } else {
+      handle = e.target.closest(".handle");
+    }
+    if (handle != null) {
+      onHandleClick(handle);
+    }
+  });
 };
 
+const onHandleClick = (handle) => {
+  const slider = handle.closest(".slider").querySelector(".slider-mask");
+
+  const sliderIndex = parseInt(
+    getComputedStyle(slider).getPropertyValue("--slider-index")
+  );
+
+  if (handle.classList.contains("handle-previous")) {
+    slider.style.setProperty("--slider-index", sliderIndex - 1);
+    nextTouched();
+  }
+  if (handle.classList.contains("handle-next")) {
+    slider.style.setProperty("--slider-index", sliderIndex + 1);   
+    nextTouched() 
+  }
+};
 
 const sliderContent = document.querySelector(".slider-content");
 const contentsArray = sliderContent.children;
-let isTouched = false;
-
-const onHandleClick = (handle) => {
-    const slider = handle.closest('.slider').querySelector('.slider-mask')
-
-    const sliderIndex = parseInt(getComputedStyle(slider).getPropertyValue('--slider-index'));
-
-    if (handle.classList.contains("handle-previous")) {
-        slider.style.setProperty('--slider-index', sliderIndex - 1)
-        nextTouched();
-    }
-    if (handle.classList.contains("handle-next")) {
-        slider.style.setProperty('--slider-index', sliderIndex + 1)
-        nextTouched();
-    }
-};
-
 
 const nextTouched = () => {
-    const contents = Array.from(contentsArray);
-    const getSplice = contents.splice(0, 4);
-    const newChild = contents.concat(getSplice);
+  const contents = Array.from(contentsArray);
+  const removedFirstFour = contents.splice(0, 4);
+  const newArr = contents.concat(removedFirstFour);
 
-    var i;
-    for (i = 0; i < contents.length; i++) {
-        contents[i].classList.remove("is-active");
-    }
+  for (let i = 0; i < contents.length; i++) {
+    contents[i].classList.remove("is-active");
+  }
 
-    var j;
-    for (j = 4; j < newChild.length && j < 8; j++) {
-        newChild[j].classList.add("is-active");
-    }
+  for (let j = 4; j < newArr.length && j < 8; j++) {
+    newArr[j].classList.add("is-active");
+  }
 
-    for (let len = contentsArray.length - 1; len >= 0; --len) {
-        sliderContent.insertBefore(newChild[len], sliderContent.firstChild)
-        console.log(sliderContent.insertBefore(newChild[len], sliderContent.firstChild));
-    }
+  for (let len = contentsArray.length - 1; len >= 0; --len) {
+    sliderContent.insertBefore(newArr[len], sliderContent.firstChild);
+  }
+
+//   sliderContent.style.transform = 'translateX(-100%)'
 };
