@@ -128,8 +128,6 @@ const loadMovieList = () => {
   moveLeftAndRight();
 };
 
-let numberOfNextSlideClicks = 0;
-
 const moveLeftAndRight = () => {
   document.addEventListener("click", (e) => {
     let handle;
