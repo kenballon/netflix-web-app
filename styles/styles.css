@@ -302,19 +302,9 @@ section {
   list-style: none;
 }
 
-.slider .slider-mask {
-  --slider-index: 0;
-  -webkit-transform: translateX(calc(var(--slider-index) * -100%));
-          transform: translateX(calc(var(--slider-index) * -100%));
-  -webkit-transition: -webkit-transform 0.7s ease-in-out;
-  transition: -webkit-transform 0.7s ease-in-out;
-  transition: transform 0.7s ease-in-out;
-  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
-}
-
 .slider .slider-mask .slider-content {
   white-space: nowrap;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 
 .slider .slider-mask .slider-content .carousel-item {
@@ -512,10 +502,16 @@ section {
 }
 
 .next-animation {
-  -webkit-transition: -webkit-transform 0.7s ease;
-  transition: -webkit-transform 0.7s ease;
-  transition: transform 0.7s ease;
-  transition: transform 0.7s ease, -webkit-transform 0.7s ease;
+  -webkit-transition: -webkit-transform 0.7s ease-in-out;
+  transition: -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
   pointer-events: none;
+}
+
+.scrolled-y {
+  background-color: #000000dc;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
 }
 /*# sourceMappingURL=styles.css.map */
