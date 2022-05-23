@@ -407,3 +407,8 @@ section {
     place-items: center;
     grid-template-columns: 70% 1fr;
 }
+
+.next-animation{
+    transition: transform .7s ease;
+    pointer-events: none;
+}

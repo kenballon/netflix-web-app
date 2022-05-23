@@ -510,4 +510,12 @@ section {
   -ms-grid-columns: 70% 1fr;
       grid-template-columns: 70% 1fr;
 }
+
+.next-animation {
+  -webkit-transition: -webkit-transform .7s ease;
+  transition: -webkit-transform .7s ease;
+  transition: transform .7s ease;
+  transition: transform .7s ease, -webkit-transform .7s ease;
+  pointer-events: none;
+}
 /*# sourceMappingURL=styles.css.map */
