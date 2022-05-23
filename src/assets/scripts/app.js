@@ -222,9 +222,11 @@ const onHandleClick = (handle) => {
     const sliderIndex = parseInt(getComputedStyle(slider).getPropertyValue('--slider-index'));
 
     if (handle.classList.contains("handle-previous")) {
+        slider.style.setProperty('--slider-index', sliderIndex - 1)
         nextTouched();
     }
     if (handle.classList.contains("handle-next")) {
+        slider.style.setProperty('--slider-index', sliderIndex + 1)
         nextTouched();
     }
 };
@@ -247,7 +249,6 @@ const nextTouched = () => {
 
     for (let len = contentsArray.length - 1; len >= 0; --len) {
         sliderContent.insertBefore(newChild[len], sliderContent.firstChild)
+        console.log(sliderContent.insertBefore(newChild[len], sliderContent.firstChild));
     }
-
-    sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
 };

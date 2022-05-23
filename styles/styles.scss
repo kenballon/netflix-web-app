@@ -10,6 +10,14 @@
 }
 
 // utility classes
+.w-100 {
+    width: 100%;
+}
+
+.ovrf-hidden {
+    overflow: hidden;
+}
+
 .padding-inline-60 {
     padding-inline: calc(var(--slider-padding) - 1.25rem);
 }
@@ -227,13 +235,13 @@ section {
         list-style: none;
     }
     .slider-mask {
+        --slider-index: 0;
+        transform: translateX(calc(var(--slider-index) * -100%));
+        transition: transform 0.7s ease-in-out;
         .slider-content {
-            --slider-index: 0;
-            --trans-slide: transform 0.7s ease-in-out;
             white-space: nowrap;
             margin-bottom: 50px;
-            // transform: translateX(calc(var(--slider-index) * -100%));
-            // transition: var(--trans-slide);
+            ;
             .carousel-item {
                 position: relative;
                 display: inline-block;
