@@ -249,7 +249,5 @@ const nextTouched = () => {
         sliderContent.insertBefore(newChild[len], sliderContent.firstChild)
     }
 
-    // sliderContent.classList.remove('next-animation');
     sliderContent.style.transform = 'translate3d(-100%, 0px, 0px)';
-    // sliderContent.removeEventListener('transitionend', nextTouched);
 };
